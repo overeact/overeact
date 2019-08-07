@@ -6,18 +6,26 @@ import { KeyboardAvoidingView } from 'react-native';
 import withOverride, { OverrideProvider } from '../styler/withOverride';
 // importa os recursos do tema
 import withTheme from '../styler/withTheme';
-
 /**
- * 
- * @param {{styles, style, children}} param0 
+ * Componente que contém uma tela
  */
-const Container = ({styles, override, style, children}) => (
-  <OverrideProvider override={override}>
-    <KeyboardAvoidingView style={[styles.root, style]} behavior="padding" enabled>
-      {children}
-    </KeyboardAvoidingView>
-  </OverrideProvider>
-);
+class Container extends React.PureComponent {
+  /**
+   * Renderiza o componente
+   */
+  render = () => {
+    // coleta as props
+    const { styles, override, style, children } = this.props;
+    // retorna o componente
+    return (
+      <OverrideProvider override={override}>
+        <KeyboardAvoidingView style={[styles.root, style]} behavior="padding" enabled>
+          {children}
+        </KeyboardAvoidingView>
+      </OverrideProvider>
+    );
+  };
+}
 
 /**
  * Mapeia o tema para props

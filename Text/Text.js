@@ -9,7 +9,7 @@ import withTheme from '../styler/withTheme';
 /**
  * Componente básico para mostrar texto
  */
-class Text extends React.Component {
+class Text extends React.PureComponent {
   /**
    * Renderiza o componente
    */

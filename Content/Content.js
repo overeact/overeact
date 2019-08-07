@@ -11,13 +11,27 @@ import Constants from 'expo-constants';
 
 /**
  * Controla o conteúdo da aplicação
- * @param {{}} props
  */
-const Content = ({styles, style, contentContainerStyle, children, noStatusBar, ...props}) => (
-  <ScrollView style={[styles.root, style]} contentContainerStyle={[styles.content, contentContainerStyle, noStatusBar && styles.statusBar]} {...props}>
-    {children}
-  </ScrollView>
-);
+class Content extends React.PureComponent {
+  /**
+   * Renderiza o componente
+   */
+  render = () => {
+    // coleta as props
+    const { styles, style, contentContainerStyle, children, noStatusBar, ...props } = this.props;
+    // retorna o componente
+    return (
+      <ScrollView 
+        style={[styles.root, style]} 
+        contentContainerStyle={[styles.content, contentContainerStyle, noStatusBar && styles.statusBar]}
+        keyboardShouldPersistTaps="handled"
+        {...props}
+      >
+        {children}
+      </ScrollView>
+    );
+  }
+}
 
 /**
  * Mapeia o tema para props
