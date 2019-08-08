@@ -1,6 +1,10 @@
-import React from 'react';
+// importa o react
+import React from 'react'
+// importa os recursos do react-native
 import { Platform, View } from 'react-native';
+// importa os recursos de override
 import withOverride from '../styler/withOverride';
+// importa os recursos de tema
 import withTheme from '../styler/withTheme';
 
 /**
