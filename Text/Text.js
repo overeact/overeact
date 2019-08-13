@@ -21,19 +21,40 @@ class Text extends React.PureComponent {
   };
 }
 
+Text.defaultProps = {
+  align: 'left',
+};
+
 /**
  * mapeia os styles do tema para os styles do componente
  * @param {{}} styles do tema
  */
-const mapThemeToProps = () => ({
-  styles: {
-    // styles do texto
-    root: {
-      fontSize: 15,
-      color: '#444',
-    },
+const mapThemeToProps = (_, props) => {
+  // define as variantes
+  let variants = {};
+  // se for para preencher todo o container
+  if(props.fill) {
+    // define os styles
+    variants = {
+      // 100% do container
+      flex: 1,
+      // 100% do container
+      width: '100%',
+    };
   }
-});
+  // retorna as props
+  return {
+    styles: {
+      // styles do texto
+      root: {
+        fontSize: 15,
+        color: '#444',
+        textAlign: props.align,
+        ...variants,
+      },
+    },
+  };
+};
 
 const componentName = 'Text';
 
