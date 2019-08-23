@@ -4,6 +4,7 @@ import React from 'react';
 import * as Icons from '@expo/vector-icons';
 // importa o wrapper para coletar styles e props do tema
 import withTheme from '../styler/withTheme';
+// importa os recursos de override
 import withOverride from '../styler/withOverride';
 
 /**
@@ -24,13 +25,15 @@ class Icon extends React.Component {
    */
   render = () => {
     // coleta os styles
-    const { style, styles, size } = this.props;
+    const { style, styles, size, color } = this.props;
     // coleta o componente com base no tipo
     const IconComponent = this._getIconType();
     // define o tamanho do icone
-    const fontSize = size ? {fontSize: size} : null;
+    const fontSize = size ? { fontSize: size } : null;
+    // define o tamanho do icone
+    const _color = color ? { color: color } : null;
     // retorna o componente
-    return <IconComponent style={[styles.root, fontSize, style]} name={this.props.name} />
+    return <IconComponent style={[styles.root, fontSize, _color, style]} name={this.props.name} />
   };
 }
 
