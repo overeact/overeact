@@ -1,15 +1,16 @@
 // importa o react
 import React from 'react';
 // importa os recursos do react-native
-import { View, Text } from 'react-native';
-// importa a base de um touchable
-import ButtonBase from '../Button/ButtonBase';
+import { View, Text, Platform, TouchableNativeFeedback, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 // importa os recursos de tema
 import withTheme from '../styler/withTheme';
 // importa os recursos de override
 import withOverride from '../styler/withOverride';
 // importa o icone
 import Icon from '../Icon';
+
+// define o touchable para o botão do checkbox
+const Touchable = Platform.select({ios: TouchableOpacity, android: TouchableNativeFeedback});
 
 /**
  * Componente funcional de label
@@ -66,14 +67,18 @@ class CheckBox extends React.Component {
     const { checked } = this.state;
     // retorna o componente
     return (
-      <ButtonBase onPress={this._toggleCheck} ripple={false}>
+      <TouchableWithoutFeedback onPress={this._toggleCheck}>
         <View style={styles.root}>
-          <View style={styles.check}>
-            {checked && (icon || <Icon name="check" type="MaterialIcons" />)}
+          <View style={styles.container}>
+            <Touchable onPress={this._toggleCheck}>
+              <View style={styles.check}>
+                {checked && (icon || <Icon name="check" type="MaterialIcons" />)}
+              </View>
+            </Touchable>
           </View>
           <Label style={styles.label}>{label}</Label>
         </View>
-      </ButtonBase>
+      </TouchableWithoutFeedback>
     );
   };
 }
@@ -101,6 +106,17 @@ const mapThemeToProps = theme => ({
       alignItems: 'center',
     },
     // styles do container do check
+    container: {
+      // define a cor da borda do checkbox
+      borderColor: theme.application.primary,
+      // define o radio da borda
+      borderRadius: 5,
+      // define o tamanho da borda
+      borderWidth: 2,
+      // define o overflow
+      overflow: 'hidden',
+    },
+    // styles do container do check
     check: {
       // define a largura
       width: 30,
@@ -108,12 +124,6 @@ const mapThemeToProps = theme => ({
       height: 30,
       // define a cor de fun do checkbox
       backgroundColor: '#fff',
-      // define a cor da borda do checkbox
-      borderColor: theme.application.primary,
-      // define o radio da borda
-      borderRadius: 5,
-      // define o tamanho da borda
-      borderWidth: 2,
       // alinha os filhos ao centro
       alignItems: 'center',
       // justifica os filhos ao centro
